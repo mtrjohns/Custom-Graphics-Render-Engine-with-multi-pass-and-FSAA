@@ -1,0 +1,77 @@
+// GraphicsTemplate.cpp
+// 
+//////////////////////////////////////////////////////////////////////////////////////////
+// includes 
+//////////////////////////////////////////////////////////////////////////////////////////
+#include "stdafx.h"
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// externals 
+//////////////////////////////////////////////////////////////////////////////////////////
+extern cRenderClass graphics;
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// renderScene() - render the scene
+//////////////////////////////////////////////////////////////////////////////////////////
+void renderScene()
+{
+	int pass = 0;
+
+	// set a colour
+	graphics.colour( 0,1,0 );
+	
+	// set pixel size..
+	graphics.pointSize(10);
+
+	// draw to an off screen buffer
+	graphics.drawPixel( 200, 200 );
+
+	while( pass < PASSES )
+	{
+		// render first pass
+		graphics.render(pass++);
+	}
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// update() - update function
+//////////////////////////////////////////////////////////////////////////////////////////
+void update()
+{
+	// add any update code here...
+
+	// always re-render the scene..
+	renderScene();
+}
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+// _tmain() - program entry point
+//////////////////////////////////////////////////////////////////////////////////////////
+int _tmain(int argc, _TCHAR* argv[])
+{	
+	// init glut stuff..
+	graphics.create(argc, argv);
+
+	// good place for one-off initialisations and objects creation..
+
+	// Control Menu - Console Output
+	cout << "Daily Halftone Shader - MJohns - P147264"	<< endl << endl
+		<< "Controls: "									<< endl
+		<< "Toggle Object (Torus):\t\t T"				<< endl
+		<< "Toggle Object (Lamp):\t\t L"				<< endl
+		<< "Toggle Object (Fly):\t\t F"					<< endl
+		<< "Toggle Object Rotation: \t R"				<< endl
+		<< "Toggle FSAA: \t\t\t A"						<< endl
+		<< "Toggle HalfTone: \t\t H"					<< endl
+		<< "Toggle HalfTone Object Colour: \t C"		<< endl
+		<< "Increase Halftone Blobs: \t Up Arrow"		<< endl
+		<< "Decrease Halftone Blobs: \t Down Arrow"		<< endl
+		<< "Quit: \t\t\t\t Esc"							<< endl;
+
+	// enter game loop..
+	graphics.loop();	
+
+	return 0;
+}
